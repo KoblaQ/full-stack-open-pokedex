@@ -4,12 +4,12 @@ import pluginReact from 'eslint-plugin-react';
 export default [
   {
     files: ['app.js'],
-    languageOptions: { sourceType: 'commonjs' },
+    // languageOptions: { sourceType: 'commonjs' },
   },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
-      sourceType: 'module',
+      // sourceType: 'module',
       globals: globals.browser,
       parserOptions: {
         ecmaVersion: 'latest',
