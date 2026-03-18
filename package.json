@@ -62,7 +62,7 @@
     "setupFiles": [
       "<rootDir>/jest.setup.js"
     ],
-    "testPathIgnorepATTERNS": [
+    "testPathIgnorePatterns": [
       "e2e-tests"
     ]
   }
