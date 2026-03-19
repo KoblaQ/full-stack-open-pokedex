@@ -12,8 +12,10 @@ app.get('/version', (req, res) => {
 
 // endpoint for doing an application health check
 app.get('/health', (req, res) => {
+  // eslint-disable-next-line no-constant-condition
+  if (true) throw 'error...  ';
   res.send('ok');
-});
+};);
 
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
