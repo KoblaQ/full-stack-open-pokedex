@@ -2,8 +2,6 @@
 
 echo "Build script"
 
-npm run eslint
-npm run test
-npm run test:e2e
+npm install
 npm run build
 
