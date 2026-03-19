@@ -4,6 +4,8 @@ This repository is used for the CI/CD module of the Full stack open course
 
 Fork the repository to complete course exercises
 
+Deployed Pokedex App on Render: https://full-stack-open-pokedex-vua6.onrender.com
+
 ## Commands
 
 Start by running `npm install` inside the project folder
