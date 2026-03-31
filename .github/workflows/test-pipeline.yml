@@ -5,7 +5,7 @@ on:
     branches:
       - action-test
   pull_request:
-    branches: [action-test]
+    branches: [actions-test]
     types: [opened, synchronize]
 
 jobs:
