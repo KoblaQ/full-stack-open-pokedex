@@ -68,7 +68,7 @@ jobs:
             **Author:** ${{ github.event.head_commit.author.name }}
       - name: Build Failed
         uses: sarisia/actions-status-discord@v1
-        if: ${{ success() }}
+        if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK}}
           nodetail: true
