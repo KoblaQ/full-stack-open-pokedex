@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
   notification:
-    if: ${{ always() && github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
@@ -85,4 +85,4 @@ jobs:
             **Job:** ${{ github.job }}
 
             [View Commit](${{ github.event.head_commit.url}})
-            [View Workflow Run](${{ github.workflow}})
+            [View Workflow Run](${{ github.server_url}}/${{ github.repository }}/actions/runs/${{ github.run_id }})
