@@ -58,17 +58,19 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
           status: ${{ job.status }}
           title: Deployment Details
           description: |
             **Commit:** ${{ github.sha }}
             **Message:** ${{ github.event.head_commit.message}}
-            **Author:** ${{ github.event.head_commit.author }}
+            **Author:** ${{ github.event.head_commit.author.name }}
       - name: Build Failed
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK}}
+          nodetail: true
           status: ${{ job.status }}
           content: '❌ **Build Failed!** The pipeline encountered an error'
           title: Failure Details
