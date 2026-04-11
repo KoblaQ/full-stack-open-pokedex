@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
   notification:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ always() && github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
             **Author:** ${{ github.event.head_commit.author.name }}
       - name: Build Failed
         uses: sarisia/actions-status-discord@v1
-        if: ${{ failure() }}
+        if: ${{ success() }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK}}
           nodetail: true
