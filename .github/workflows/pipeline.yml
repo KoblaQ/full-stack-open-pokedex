@@ -60,6 +60,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nodetail: true
           status: ${{ job.status }}
+          content: '✅ **Deployment Successful** A new version deployed to production'
           title: Deployment Details
           description: |
             **Commit:** ${{ github.sha }}
@@ -82,3 +83,6 @@ jobs:
             **Author:** ${{ github.event.head_commit.author.name }}
             **Workflow:** ${{ github.workflow }}
             **Job:** ${{ github.job }}
+
+            [View Commit](${{ github.event.head_commit.url}})
+            [View Workflow Run](${{ github.workflow}})
