@@ -62,7 +62,7 @@ jobs:
             **Author:** ${{ github.event.head_commit.author.name }}
   notify_failure:
     if: ${{ github.event_name == 'push' && needs.deploy.result == 'failure'}}
-    needs: [deploy]
+    needs: [build_and_test, deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Failed Build notification
