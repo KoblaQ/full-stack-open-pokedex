@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -34,23 +34,15 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  deploy:
+    needs: [build_and_test]
+    runs-on: ubuntu-latest
+    steps:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
-  tag_release:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-  notification:
-    if: ${{ github.event_name == 'push' }}
-    needs: [simple_deployment_pipeline]
+  notify_success:
+    needs: [deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Success Notification
@@ -66,6 +58,10 @@ jobs:
             **Commit:** ${{ github.sha }}
             **Message:** ${{ github.event.head_commit.message}}
             **Author:** ${{ github.event.head_commit.author.name }}
+  notify_failure:
+    needs: [build_and_test]
+    runs-on: ubuntu-latest
+    steps:
       - name: Build Failed
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
@@ -86,3 +82,13 @@ jobs:
 
             [View Commit](${{ github.event.head_commit.url}})
             [View Workflow Run](${{ github.server_url}}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+  tag_release:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
