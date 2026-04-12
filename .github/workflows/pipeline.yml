@@ -87,7 +87,7 @@ jobs:
             [View Workflow Run](${{ github.server_url}}/${{ github.repository }}/actions/runs/${{ github.run_id }})
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
-    needs: [notify_success]
+    needs: [deploy, notify_success]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
