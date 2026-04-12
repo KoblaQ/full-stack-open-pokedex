@@ -42,6 +42,7 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
   notify_success:
+    if: ${{ github.event_name == 'push' }}
     needs: [deploy]
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +60,8 @@ jobs:
             **Message:** ${{ github.event.head_commit.message}}
             **Author:** ${{ github.event.head_commit.author.name }}
   notify_failure:
-    needs: [build_and_test]
+    if: ${{ github.event_name == 'push' }}
+    needs: [deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Build Failed
@@ -83,6 +85,7 @@ jobs:
             [View Commit](${{ github.event.head_commit.url}})
             [View Workflow Run](${{ github.server_url}}/${{ github.repository }}/actions/runs/${{ github.run_id }})
   tag_release:
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
     needs: [deploy]
     runs-on: ubuntu-latest
     steps:
