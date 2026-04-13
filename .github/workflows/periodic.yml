@@ -17,5 +17,4 @@ jobs:
       - name: pokedex_health_check
         uses: jtalk/url-health-check-action@v5
         with:
-          url: https://full-stack-open-pokedex-vua6.onrender.com/health
-          max-attempts: 3
+          url: https://full-stack-open-pokedex-vua6.onrender.com/github-actions-health

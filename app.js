@@ -17,6 +17,11 @@ app.get('/health', (req, res) => {
   res.send('ok');
 });
 
+// endpoint for github actions to check if the application is up and running
+app.get('/github-actions-health', (req, res) => {
+  res.status(500).send('error');
+});
+
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
 });
