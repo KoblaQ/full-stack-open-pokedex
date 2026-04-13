@@ -3,7 +3,7 @@ name: Periodic Hello
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0 9 * * *'
 
 jobs:
   say_hello:
