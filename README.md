@@ -2,10 +2,6 @@
 
 This repository is used for the CI/CD module of the Full stack open course
 
-Fork the repository to complete course exercises
-
-Deployed Pokedex App on Render: https://full-stack-open-pokedex-vua6.onrender.com
-
 ## Commands
 
 Start by running `npm install` inside the project folder
@@ -15,3 +11,9 @@ Start by running `npm install` inside the project folder
 `npm run eslint` to run eslint
 `npm run build` to make a production build
 `npm run start-prod` to run your production build
+
+## SUBMISSION LINKS
+
+**Deployed Pokedex App on Render:** https://full-stack-open-pokedex-vua6.onrender.com
+
+**REPOSITORY FOR ex.21 - 22:** https://github.com/KoblaQ/full-stack-open-continuous-integration
